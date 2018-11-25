@@ -1,0 +1,109 @@
+.container {
+  background-color: #F5F5F5;
+  height: 100%;
+  padding: 1% 0 25% 0; }
+
+.todo {
+  position: relative;
+  margin: auto;
+  width: 35%;
+  display: flex;
+  flex-shrink: 0 1 150%;
+  overflow: hidden;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  box-shadow: 2px 3px 17px 0px #baafba;
+  background-color: white;
+  font-family: "Open Sans";
+  text-align: center; }
+  .todo__top {
+    align-items: flex-start;
+    display: flex;
+    width: 100%; }
+  .todo__input {
+    width: 95%;
+    flex-shrink: 1;
+    padding: 20px;
+    border: 0 !important;
+    z-index: 3; }
+  .todo__task-container {
+    width: 100%;
+    margin-left: 0;
+    padding-left: 0;
+    margin: 0; }
+  .todo__task-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px;
+    border-top: 1px solid rgba(134, 126, 139, 0.6); }
+  .todo__check-label {
+    width: 35px;
+    height: 35px;
+    background-image: url("../images/unchecked.svg");
+    background-size: cover; }
+  .todo__bottom {
+    display: flex;
+    justify-content: space-between;
+    width: 95%;
+    padding: 15px 20px 10px 20px;
+    border-top: 1px solid rgba(134, 126, 139, 0.6);
+    color: gray;
+    font-size: 14px; }
+  .todo__counter {
+    align-self: flex-start; }
+  .todo__tabs {
+    display: flex;
+    align-self: center; }
+  .todo__tabs * {
+    margin-right: 5px; }
+  .todo__remove-item {
+    width: 20px;
+    height: 20px;
+    background-image: url("../images/close-icon.png");
+    background-size: cover;
+    opacity: 0; }
+  .todo__clear-complated {
+    align-self: flex-end;
+    opacity: 0; }
+
+.checked {
+  text-decoration: line-through; }
+
+.checked-image {
+  background-image: url("../images/checked.svg");
+  background-size: cover; }
+
+.hide {
+  display: none; }
+
+.tabs-item {
+  margin-right: 5px; }
+
+.todo-title {
+  text-align: center;
+  font-size: 5em;
+  opacity: 0.2;
+  margin: 1%; }
+
+.down {
+  transform: rotate(45deg);
+  -webkit-transform: rotate(45deg); }
+
+i {
+  border: solid black;
+  border-width: 0 3px 3px 0;
+  display: inline-block;
+  padding: 3px; }
+
+.opacity {
+  opacity: 1;
+  z-index: 5; }
+
+.flex-start {
+  align-self: flex-start;
+  display: flex;
+  justify-content: space-between;
+  align-self: center;
+  width: 30%; }
