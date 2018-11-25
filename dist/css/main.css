@@ -1,7 +1,8 @@
 .container {
   background-color: #F5F5F5;
   height: 100%;
-  padding: 1% 0 25% 0; }
+  margin-top: -3%;
+  padding: 1% 0 30% 0; }
 
 .todo {
   position: relative;
@@ -57,7 +58,7 @@
     display: flex;
     align-self: center; }
   .todo__tabs * {
-    margin-right: 5px;
+    padding-right: 5px;
     padding: 2px; }
   .todo__remove-item {
     width: 20px;
@@ -115,3 +116,8 @@ i {
   justify-content: space-between;
   align-self: center;
   width: 90%; }
+
+@media (max-width: 800px) {
+  .todo {
+    margin-top: 50px;
+    width: 80%; } }
