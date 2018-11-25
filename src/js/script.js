@@ -1,5 +1,4 @@
 (function wind() {
-  const todo = document.querySelector('.todo');
   const input = document.querySelector('.todo__input');
   const taskContainer = document.querySelector('.todo__task-container');
   const bottom = document.querySelector('.todo__bottom');
@@ -8,6 +7,8 @@
   const activeTab = document.querySelector('.todo__active-tasks');
   const completedTab = document.querySelector('.todo__completed-tasks');
   const clearActiveButton = document.querySelector('.todo__clear-complated');
+  const tabBattons = document.querySelectorAll('.tab-button');0
+  const tabsContainer = document.querySelector('.todo__tabs');
   let allTasks = null;
   let allExisting = null;
   let completedTasks = null;
@@ -41,7 +42,7 @@
   };
 
   const createTaskEventListener = (event) => {
-    if (event.keyCode === 13) {
+    if (event.keyCode === 13 && input.value !== '') {
 
       const task = document.createElement('li');
       taskContainer.appendChild(task);
@@ -53,7 +54,7 @@
 
       const checkLabel = document.createElement('label');
       taskLeftSide.appendChild(checkLabel);
-      checkLabel.classList.add('todo__check-label');
+      checkLabel.classList.add('todo__check-label', 'cursor');
 
       const check = document.createElement('input');
       check.setAttribute('type', 'checkbox');
@@ -92,7 +93,7 @@
 
       const removeItem = document.createElement('div');
       task.appendChild(removeItem);
-      removeItem.classList.add('todo__remove-item');
+      removeItem.classList.add('todo__remove-item', 'cursor');
 
 
       /* remove and add close element on every task */
@@ -124,6 +125,13 @@
     }
   };
 
+  const setCurrentButton = (event) => {
+    for (let i = 0; i < tabBattons.length; i += 1) {
+      tabBattons[i].classList.remove('current-button');
+    }
+    event.target.classList.add('current-button');
+  };
+
   const showAll = () => {
     allTasks = document.querySelectorAll('.todo__task-item');
     for (let i = 0; i < allTasks.length; i += 1) {
@@ -151,7 +159,6 @@
 
   const clearActive = () => {
     allTasks = document.querySelectorAll('.todo__task-item');
-    // console.log('clear');
     for (let i = 0; i < allTasks.length; i += 1) {
       if (/checked/.test(allTasks[i].className) === true) {
         allTasks[i].remove();
@@ -169,6 +176,9 @@
     activeTab.addEventListener('click', showActive);
     completedTab.addEventListener('click', showCompleted);
     clearActiveButton.addEventListener('click', clearActive);
+    tabsContainer.addEventListener('click', function(event) {
+      setCurrentButton(event);
+    });
   };
   todoInit();
   //todo.addEventListener('change', todoInit);
