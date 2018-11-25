@@ -7,14 +7,12 @@
   position: relative;
   margin: auto;
   width: 35%;
-  //padding: 20px;
   display: flex;
   flex-shrink: 0 1 150%;
   overflow: hidden;
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  //border: 1px solid gray;
   box-shadow: 2px 3px 17px 0px rgba(186,175,186,1);
   background-color: white;
   font-family: "Open Sans";
@@ -56,7 +54,7 @@
     background-size: cover;
   }
 
-  &__bottom{
+  &__bottom {
     display: flex;
     justify-content: space-between;
     width: 95%;
@@ -76,27 +74,23 @@
 
   }
 
-  &__tabs *{
+  &__tabs * {
     margin-right: 5px;
     padding: 2px;
   }
-
-
-
+  
   &__remove-item {
     width: 20px;
     height: 20px;
-    //background-color: red;
     background-image: url('../images/close-icon.png');
     background-size: cover; 
     opacity: 0;
   }
 
-  &__clear-complated{
+  &__clear-complated {
     align-self: flex-end;
     opacity: 0;
-  }
-  
+  } 
 }
 
 .checked {
@@ -138,7 +132,6 @@ i {
 .opacity {
   opacity: 1;
   z-index: 5;
-  // background-image: url('');
 }
 
 .current-button {
@@ -155,5 +148,5 @@ i {
   display: flex;
   justify-content: space-between;
   align-self: center;
-  width: 30%;
+  width: 90%;
 }

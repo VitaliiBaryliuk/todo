@@ -7,94 +7,68 @@
   const activeTab = document.querySelector('.todo__active-tasks');
   const completedTab = document.querySelector('.todo__completed-tasks');
   const clearActiveButton = document.querySelector('.todo__clear-complated');
-  const tabBattons = document.querySelectorAll('.tab-button');0
+  const tabBattons = document.querySelectorAll('.tab-button');
   const tabsContainer = document.querySelector('.todo__tabs');
   let allTasks = null;
   let allExisting = null;
   let completedTasks = null;
 
-  function setElements(parentElemm, curentElem) {
+  const setElement = (curentElem, parentElemm, classOne, classTwo) => {
     parentElemm.appendChild(curentElem);
-    curentElem.classList.add('todo__task-text', 'flex-start');
-    curentElem.innerHTML = input.value;
-  }
+    curentElem.classList.add(classOne, classTwo);
+  };
 
-  /*   */
-  // function setChecked(labelElem, checkElem, taskElem) {
-  //   console.log('OK');
-  //   if (checkElem.checked) {
-  //     labelElem.classList.add('checked-image');
-  //     taskElem.classList.add('checked');
-  //     allExisting = document.querySelectorAll('.todo__task-item').length - document.querySelectorAll('.checked').length;
-  //     counter.innerHTML = `${allExisting} items left`;
-  //   } else {
-  //     labelElem.classList.remove('checked-image');
-  //     taskElem.classList.remove('checked');
-  //     allExisting = document.querySelectorAll('.todo__task-item').length - document.querySelectorAll('.checked').length;
-  //     counter.innerHTML = `${allExisting} items left`;
-  //   }
-  //   return counter;
-  // }
+  const showHideClearCompleted = () => {
+    if (document.querySelectorAll('.checked').length > 0) {
+      document.querySelector('.todo__clear-complated').classList.add('opacity')
+    } else {
+      document.querySelector('.todo__clear-complated').classList.remove('opacity');
+    }
+  };
 
-  const setExisting = () => {
-    allExisting = document.querySelectorAll('.todo__task-item').length - document.querySelectorAll('.checked').length;;
+  const setExistingCounter = () => {
+    allExisting = document.querySelectorAll('.todo__task-item').length - document.querySelectorAll('.checked').length;
     counter.innerHTML = `${allExisting} items left`;
+    showHideClearCompleted();
   };
 
   const createTaskEventListener = (event) => {
     if (event.keyCode === 13 && input.value !== '') {
-
       const task = document.createElement('li');
-      taskContainer.appendChild(task);
-      task.classList.add('todo__task-item');
+      setElement(task, taskContainer, 'todo__task-item');
 
       const taskLeftSide = document.createElement('div');
-      task.appendChild(taskLeftSide);
-      taskLeftSide.classList.add('flex-start');
+      setElement(taskLeftSide, task, 'flex-start');
 
       const checkLabel = document.createElement('label');
-      taskLeftSide.appendChild(checkLabel);
-      checkLabel.classList.add('todo__check-label', 'cursor');
+      setElement(checkLabel, taskLeftSide, 'todo__check-label', 'cursor');
 
       const check = document.createElement('input');
+      setElement(check, checkLabel, 'hide');
       check.setAttribute('type', 'checkbox');
-      check.classList.add('hide');
-      checkLabel.appendChild(check);
 
+      const taskText = document.createElement('div');
+      setElement(taskText, taskLeftSide, 'todo__task-text', 'flex-start');
+      taskText.innerHTML = input.value;
 
-//      checkLabel.addEventListener('click', setChecked(checkLabel, check, task));
+      const removeItem = document.createElement('div');
+      setElement(removeItem, task, 'todo__remove-item', 'cursor');
+
       checkLabel.addEventListener('click', () => {
+        const tasksCount = document.querySelectorAll('.todo__task-item').length;
+        const checkedTasksCount = document.querySelectorAll('.checked').length;
         if (check.checked) {
-
           checkLabel.classList.add('checked-image');
           task.classList.add('checked');
-          //console.log(document.querySelector('.todo__clear-complated'));
-          allExisting = document.querySelectorAll('.todo__task-item').length - document.querySelectorAll('.checked').length;
-          counter.innerHTML = `${allExisting} items left`;
-          document.querySelectorAll('.checked').length > 0 ? document.querySelector('.todo__clear-complated').classList.add('opacity'): document.querySelector('.todo__clear-complated').classList.remove('opacity'); 
-          // setExisting();
-
+          allExisting = tasksCount - checkedTasksCount;
+          setExistingCounter();
         } else {
           checkLabel.classList.remove('checked-image');
           task.classList.remove('checked');
-          //console.log(document.querySelector('.todo__clear-complated'));
-          allExisting = document.querySelectorAll('.todo__task-item').length - document.querySelectorAll('.checked').length;
-          counter.innerHTML = `${allExisting} items left`;
-
-          document.querySelectorAll('.checked').length > 0 ? document.querySelector('.todo__clear-complated').classList.add('opacity'): document.querySelector('.todo__clear-complated').classList.remove('opacity'); 
-          // setExisting();
+          allExisting = tasksCount - checkedTasksCount;
+          setExistingCounter();
         }
-        //return counter;
       });
-
-
-      const taskText = document.createElement('div');
-      setElements(taskLeftSide, taskText);
-
-      const removeItem = document.createElement('div');
-      task.appendChild(removeItem);
-      removeItem.classList.add('todo__remove-item', 'cursor');
-
 
       /* remove and add close element on every task */
       task.addEventListener('mouseover', () => {
@@ -104,29 +78,21 @@
         removeItem.classList.remove('opacity');
       });
 
-
-      // const removeItem = document.createElement('div');
-      // task.appendChild(removeItem);
-      // removeItem.classList.add('todo__remove-item');
-      // removeItem.innerHTML = '&#88;';
-
-
       removeItem.addEventListener('click', () => {
         removeItem.parentElement.remove();
-        document.querySelectorAll('.checked').length > 0 ? document.querySelector('.todo__clear-complated').classList.add('opacity') : document.querySelector('.todo__clear-complated').classList.remove('opacity');
-        setExisting();
+        showHideClearCompleted();
+        setExistingCounter();
       });
-
 
       input.value = '';
       bottom.classList.remove('hide');
-      setExisting();
-      // counter.innerHTML = `${allExisting} items left`;
+      setExistingCounter();
     }
   };
 
   const setCurrentButton = (event) => {
     for (let i = 0; i < tabBattons.length; i += 1) {
+      tabsContainer.classList.remove('current-button');
       tabBattons[i].classList.remove('current-button');
     }
     event.target.classList.add('current-button');
@@ -166,20 +132,15 @@
     }
   };
 
-  const createTask = () => {
-    input.addEventListener('keyup', createTaskEventListener);
-  };
-
   const todoInit = () => {
-    createTask();
+    input.addEventListener('keyup', createTaskEventListener);
     allTab.addEventListener('click', showAll);
     activeTab.addEventListener('click', showActive);
     completedTab.addEventListener('click', showCompleted);
     clearActiveButton.addEventListener('click', clearActive);
-    tabsContainer.addEventListener('click', function(event) {
+    tabsContainer.addEventListener('click', (event) => {
       setCurrentButton(event);
     });
   };
   todoInit();
-  //todo.addEventListener('change', todoInit);
 }());
