@@ -52,6 +52,8 @@
     height: 35px;
     background-image: url("../images/unchecked.svg");
     background-size: cover; }
+  .todo__task-text {
+    margin-left: 10px; }
   .todo__bottom {
     display: flex;
     justify-content: space-between;
@@ -60,11 +62,12 @@
     border-top: 1px solid rgba(134, 126, 139, 0.6);
     color: gray;
     font-size: 14px; }
-  .todo__counter {
-    align-self: flex-start; }
-  .todo__tabs {
-    display: flex;
+  .todo__bottom * {
     align-self: center; }
+  .todo__tabs {
+    display: flex; }
+  .todo__clear-complated {
+    opacity: 0; }
   .todo__tabs * {
     padding-right: 5px;
     padding: 2px; }
@@ -73,9 +76,6 @@
     height: 20px;
     background-image: url("../images/close-icon.png");
     background-size: cover;
-    opacity: 0; }
-  .todo__clear-complated {
-    align-self: flex-end;
     opacity: 0; }
 
 .checked {
